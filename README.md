@@ -436,3 +436,12 @@ The node now rounds the stamps once in integer nanoseconds (`_stamp()` in `sim_n
 - The script `build_world.py` falls back to unitree_rl_gym's `g1_29dof_rev_1_0.xml` (no hands) when the
   canonical robot MJCF is missing. It then marks `g1_robot.xml` and `robot_source.txt` as a fallback. The
   simulator node then echoes hand commands as hand state.
+
+## License
+
+The license of this repository is the Apache License, Version 2.0 (see `LICENSE`).
+You can use, change and share this work, also for commercial use.
+If you share this work or a work that you built on it, keep the `NOTICE` file.
+Give this credit in your documentation and product credits: "Based on hospital-sim by Bkrakshith (https://github.com/Bkrakshith/hospital-sim)".
+To cite this work in a publication, use `CITATION.cff`.
+Some third-party parts keep their own licences. The `NOTICE` file lists them.
