@@ -1,0 +1,2 @@
+g1-brainco-description/g1_29dof_brainco/mjcf/g1_29dof_brainco.xml
+fallback=False

@@ -1,0 +1,22 @@
+<mujoco model="flat_world">
+  <compiler angle="radian" />
+  <default>
+    <default class="world">
+      <geom group="0" contype="1" conaffinity="1" condim="3" friction="1 0.005 0.0001" />
+    </default>
+  </default>
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="3072" />
+    <texture type="2d" name="floortex" builtin="checker" rgb1="0.80 0.80 0.76" rgb2="0.72 0.72 0.68" width="512" height="512" />
+    <material name="floor" texture="floortex" texuniform="true" texrepeat="1 1" reflectance="0" specular="0" shininess="0" />
+    <material name="wing_wall" rgba="0.88 0.90 0.92 1" />
+    <material name="building_wall" rgba="0.86 0.82 0.74 1" />
+    <material name="furniture" rgba="0.35 0.55 0.75 1" />
+    <material name="suite" rgba="0.45 0.70 0.60 1" />
+    <material name="building_obj" rgba="0.65 0.55 0.45 1" />
+  </asset>
+  <worldbody>
+    <light name="sun" pos="0 0 20" dir="0 0.2 -1" directional="true" diffuse="0.7 0.7 0.7" castshadow="false" />
+    <geom name="world_floor" class="world" type="plane" size="0 0 0.05" material="floor" />
+  </worldbody>
+</mujoco>

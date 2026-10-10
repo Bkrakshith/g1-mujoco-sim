@@ -1,0 +1,16 @@
+<mujoco model="flat_g1">
+  <include file="g1_robot.xml" />
+  <include file="worlds/flat_world.xml" />
+  <option timestep="0.002" integrator="implicitfast" cone="elliptic" impratio="10" />
+  <size memory="64M" />
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <global offwidth="1280" offheight="720" azimuth="-120" elevation="-20" />
+    <quality shadowsize="0" />
+    <map znear="0.002" zfar="5" />
+  </visual>
+  <statistic extent="20" center="0 0 1" />
+  <equality>
+    <weld name="fixed_base" body1="pelvis" active="false" solref="0.005 1" />
+  </equality>
+</mujoco>

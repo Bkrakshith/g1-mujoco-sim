@@ -1,0 +1,38 @@
+{
+ "hospital": {
+  "default": "corridor_west",
+  "corridor_west": {
+   "x": 8.93,
+   "y": -12.45,
+   "yaw": 0.0
+  },
+  "link": {
+   "x": 18.93,
+   "y": -5.65,
+   "yaw": -1.570796
+  },
+  "lobby": {
+   "x": 18.93,
+   "y": -1.95,
+   "yaw": -1.570796
+  },
+  "theatre_table": {
+   "x": 25.58,
+   "y": -20.0,
+   "yaw": -1.570796
+  },
+  "theatre_handover": {
+   "x": 23.8,
+   "y": -18.25,
+   "yaw": -1.570796
+  }
+ },
+ "flat": {
+  "default": "origin",
+  "origin": {
+   "x": 0.0,
+   "y": 0.0,
+   "yaw": 0.0
+  }
+ }
+}

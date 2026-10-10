@@ -1,0 +1,195 @@
+{
+ "checks": {
+  "stack_up": {
+   "ok": true,
+   "detail": "mode=DAMP"
+  },
+  "stand": {
+   "ok": true,
+   "detail": "mode=STAND phase=policy harness=0.0 z=0.779"
+  },
+  "stand_in_place": {
+   "ok": true,
+   "detail": "drift 0.113 m in 4 s"
+  },
+  "loco_mode": {
+   "ok": true,
+   "detail": "mode=LOCO"
+  },
+  "walk_forward": {
+   "ok": true,
+   "detail": "5.17 m forward, 0.51 m lateral"
+  },
+  "stops_after_key_timeout": {
+   "ok": true,
+   "detail": "moved 0.07 m in 2 s after release; manager cmd [0.0, 0.0, 0.0]"
+  },
+  "pause_to_stand": {
+   "ok": true,
+   "detail": "mode=STAND"
+  },
+  "manip_mode": {
+   "ok": true,
+   "detail": "mode=MANIP"
+  },
+  "arms_track_target": {
+   "ok": true,
+   "detail": "max err 0.019 rad"
+  },
+  "hand_closes": {
+   "ok": true,
+   "detail": "[0.8009965188087013, 0.8012145781061808, 0.7994885399532823, 0.7994486890621073, 0.7994599897343762, 0.7995579007840572]"
+  },
+  "balanced_in_manip": {
+   "ok": true,
+   "detail": "z 0.772"
+  },
+  "balanced_in_manip_6s": {
+   "ok": true,
+   "detail": "z 0.775, drift 0.084 m / 3 s"
+  },
+  "manip_blend_out": {
+   "ok": true,
+   "detail": "{\"detail_right_after_n\": \"blending arms to default\", \"detail_after_1_8s\": \"ready\", \"arms_after\": [0.006, -0.011, 0.045, 0.01, -0.006, 0.049]}"
+  },
+  "loco_to_manip_rejected": {
+   "ok": true,
+   "detail": "mode=LOCO msg=LOCO -> MANIP rejected: pause locomotion first (p), then m"
+  },
+  "estop_damps": {
+   "ok": true,
+   "detail": "mode=DAMP phase=damp lowcmd kp_max=0.0 kd_min=3.0"
+  }
+ },
+ "rates_idle": {
+  "lowstate_hz": 492.3,
+  "lowcmd_hz": 489.0,
+  "sim": {
+   "sim_time": 10.0,
+   "rtf": 1.001,
+   "step_ms_mean": 1.49,
+   "lowcmd_hz": 493.3,
+   "late_steps": 263,
+   "harness": 1.0,
+   "world": "hospital",
+   "hands_modelled": true,
+   "pelvis_xyz": [
+    8.943,
+    -12.45,
+    0.721
+   ]
+  }
+ },
+ "start_pose": [
+  8.942485046651871,
+  -12.450103084662445,
+  0.7208001890316912
+ ],
+ "stand_drift_4s_m": 0.113,
+ "rates_walking": {
+  "lowstate_hz": 499.1,
+  "lowcmd_hz": 498.8,
+  "controller_loop_hz": 500.0,
+  "policy_hz": 50.0,
+  "sim_rtf_min": 0.982,
+  "sim_rtf_last": 1.007,
+  "sim_step_ms_mean": 1.612
+ },
+ "walk": {
+  "forward_m": 5.17,
+  "lateral_m": 0.51,
+  "wall_s": 12.0,
+  "cmd_vel_at_end_of_hold": [
+   0.8,
+   0.0,
+   0.0
+  ],
+  "z_end": 0.772,
+  "yaw_change_rad": 0.304
+ },
+ "manip": {
+  "before": [
+   0.014,
+   -0.01,
+   0.044,
+   0.029,
+   -0.006,
+   0.06
+  ],
+  "after": [
+   -0.285,
+   0.281,
+   1.31,
+   -0.292,
+   -0.282,
+   1.31
+  ],
+  "target": [
+   -0.3,
+   0.3,
+   1.3,
+   -0.3,
+   -0.3,
+   1.3
+  ],
+  "max_err_rad": 0.019,
+  "left_hand_state": [
+   0.8,
+   0.8,
+   0.8,
+   0.8,
+   0.8,
+   0.8
+  ],
+  "z": 0.772,
+  "drift_3s_m": 0.084
+ },
+ "manip_exit": {
+  "detail_right_after_n": "blending arms to default",
+  "detail_after_1_8s": "ready",
+  "arms_after": [
+   0.006,
+   -0.011,
+   0.045,
+   0.01,
+   -0.006,
+   0.049
+  ]
+ },
+ "loco_to_manip_message": "LOCO -> MANIP rejected: pause locomotion first (p), then m",
+ "after_estop_z": 0.094,
+ "controller_status": {
+  "policy": "unitree_g1_12dof_placeholder",
+  "placeholder": true,
+  "note": "PLACEHOLDER: Unitree 12-DoF legs-only locomotion policy; waist/arms PD-held. Real ULTRA-style policy will come from rl/exports/.",
+  "policy_dir": "ros2_ws/install/g1_controller/share/g1_controller/policies/unitree_g1_12dof_placeholder",
+  "mode": "DAMP",
+  "phase": "damp",
+  "fall_detected": false,
+  "loop_hz": 500.1,
+  "policy_hz": 0.0,
+  "policy_ms": 0.222,
+  "lowstate_age_ms": 1.8,
+  "cmd_vel": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "sim_status": {
+  "sim_time": 52.0,
+  "rtf": 1.0,
+  "step_ms_mean": 1.037,
+  "lowcmd_hz": 500.0,
+  "late_steps": 68,
+  "harness": 0.0,
+  "world": "hospital",
+  "hands_modelled": true,
+  "pelvis_xyz": [
+   14.464,
+   -11.79,
+   0.094
+  ]
+ },
+ "failures": []
+}
