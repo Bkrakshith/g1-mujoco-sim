@@ -1,0 +1,15 @@
+# g1-mujoco-sim: direct Python dependencies of build_world.py, theatre.py and render_replay.py.
+# Installed into the shared .venv of the master repo: .venv/bin/pip install -r g1-mujoco-sim/requirements.txt
+# Versions are the ones in the .venv freeze (venv_local.txt, 2026-10-10). g1-whole-body-rl uses mujoco 3.10.0 in its
+# own conda env g1-mjx; do not mix the two.
+mujoco==3.14.0
+numpy==1.26.4
+# render_replay.py only (MP4 writer; imageio-ffmpeg ships its own ffmpeg 7.0.2 binary, no apt ffmpeg needed)
+imageio==2.38.0
+imageio-ffmpeg==0.6.0
+# render_replay.py --label only (burnt-in caption)
+opencv-contrib-python==4.10.0.84
+# Not listed: usd-core (pxr) for extract_scene_boxes.py is NOT installed in .venv; run it through uv, which resolved
+# usd-core 26.8 on 2026-10-10:  uv run --no-project --with usd-core python g1-mujoco-sim/extract_scene_boxes.py
+# The ROS 2 node that loads these scenes (g1_mujoco_sim) lives in hospital-sim-ros2; its rclpy, tf2_ros, sensor_msgs,
+# nav_msgs, std_srvs, unitree_hg come from ROS 2 Humble apt packages and the colcon workspace.
