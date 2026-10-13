@@ -1,0 +1,28 @@
+<mujoco model="hospital_g1_tier1">
+  <asset>
+    <model name="instrument_table" file="../hospital-sim-env/objects/mjcf/instrument_table.xml" />
+    <model name="tool_rack" file="../hospital-sim-env/objects/mjcf/tool_rack.xml" />
+    <model name="surgeon" file="../hospital-sim-env/objects/mjcf/surgeon.xml" />
+    <model name="scalpel_handle" file="../hospital-sim-env/objects/mjcf/scalpel_handle.xml" />
+    <model name="scissors" file="../hospital-sim-env/objects/mjcf/scissors.xml" />
+    <model name="angled_tweezers" file="../hospital-sim-env/objects/mjcf/angled_tweezers.xml" />
+    <model name="veress_needle" file="../hospital-sim-env/objects/mjcf/veress_needle.xml" />
+    <model name="trocar" file="../hospital-sim-env/objects/mjcf/trocar.xml" />
+    <model name="adson_forceps" file="../hospital-sim-env/objects/mjcf/adson_forceps.xml" />
+    <model name="needle_driver" file="../hospital-sim-env/objects/mjcf/needle_driver.xml" />
+  </asset>
+  <include file="g1_robot.xml" />
+  <include file="worlds/hospital_world_tier1.xml" />
+  <option timestep="0.002" integrator="implicitfast" cone="elliptic" impratio="10" />
+  <size memory="64M" />
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <global offwidth="1280" offheight="720" azimuth="-120" elevation="-20" />
+    <quality shadowsize="0" />
+    <map znear="0.002" zfar="5" />
+  </visual>
+  <statistic extent="20" center="0 0 1" />
+  <equality>
+    <weld name="fixed_base" body1="pelvis" active="false" solref="0.005 1" />
+  </equality>
+</mujoco>
