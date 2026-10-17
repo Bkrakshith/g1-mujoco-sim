@@ -116,11 +116,11 @@ This table lists the system dependencies.
 
 | Item | Version here | Needed for |
 |---|---|---|
-| Ubuntu | 22.04.5 LTS | |
+| Ubuntu | 22.04 LTS | |
 | Python (`.venv`, system interpreter with system site-packages) | 3.10.12 | all scripts |
 | `uv` | 0.12.19 | `extract_scene_boxes.py` only (`usd-core` is not in `.venv`) |
 | ROS 2 Humble (`rclpy`, `tf2_ros`, `sensor_msgs`, `nav_msgs`, `geometry_msgs`, `std_msgs`, `std_srvs`, `rosgraph_msgs`, `builtin_interfaces`) + colcon, CycloneDDS (`rmw_cyclonedds_cpp`) | apt | the `g1_mujoco_sim` node, `g1_interfaces` and the vendored `unitree_hg` messages in `hospital-sim-ros2` |
-| GPU with EGL (RTX 3070, driver 580 here) | | offscreen head-camera rendering and `render_replay.py` (`MUJOCO_GL=egl`); `build_world.py` and the physics need no GPU |
+| GPU with EGL (tested: RTX 3070, driver 580) | | offscreen head-camera rendering and `render_replay.py` (`MUJOCO_GL=egl`); `build_world.py` and the physics need no GPU |
 | ffmpeg | bundled 7.0.2 | `render_replay.py` uses the binary shipped by `imageio-ffmpeg`; no apt ffmpeg needed |
 
 This table lists the third-party Python imports of the scripts in this repository. The versions come from the
@@ -239,7 +239,7 @@ Run the scene check. The expected result is exit 0 and the two `nq=... ngeom=...
 
 ```bash
 source env.sh
-taskset -c 0-7,10-31 .venv/bin/python g1-mujoco-sim/build_world.py --check
+.venv/bin/python g1-mujoco-sim/build_world.py --check
 ```
 
 Both scenes compile without warnings. When nothing upstream changed, the regenerated files are byte-identical
@@ -388,7 +388,7 @@ The head RGB-D camera is the MJCF camera `head_d435` at `d435_link`, with `fovy`
   by assigning an `array('B')`. The same fix went into the lidar cloud.
 - The fixed-base theatre stack (simulator, controller, manager, mission) measured RTF 1.00 and a mean step of
   about 1.2 ms, with and without a camera subscriber. The camera runs at 14.7 Hz to 15 Hz, with 8 ms of render
-  plus publish for RGB and depth (RTX 3070, EGL).
+  plus publish for RGB and depth (RTX 3070, EGL). Timing numbers are in `docs/dev-notes.md`.
 
 ## Frame and spawns
 
@@ -408,32 +408,15 @@ Pass `spawn:=link` or `spawn:="x,y,yaw"` to `sim.launch.py`. The `odom` frame st
 real odometry source. The topic `/sim/ground_truth` gives the pose in the world frame. The flat world has one
 spawn, `origin`.
 
-## Measurements on this machine (RTX 3070, 32 threads)
-
-- The call `mj_step` took about 110 us with the 980-geom hospital of that time. The MID-360 slice (200 rays per
-  step, 10 000 points per 10 Hz frame) costs about 360 us. The 720-beam `/scan` costs about 0.76 ms, once
-  every 50 steps.
-- The whole simulator loop, including ROS publishing, takes 1.35 ms to 1.5 ms mean per 2 ms step. The RTF is
-  0.99 to 1.00 with the full stack (simulator, controller, manager, robot_state_publisher). It dropped to about
-  0.91 in one run while Isaac Sim and an MJX training job loaded the CPU at the same time.
-- The topics `/lowstate` and `/lowcmd` run at 500 Hz. The policy runs at 50 Hz.
-
-## Fix of 2026-09-30: /clock stamps
-
-The node `g1_mujoco_sim` stamped t = 6.9999999999 as 6.0 s. That value is the float sum of 0.002 s steps. The
-expression `int(t)` + `round(frac) % 1e9` sent `/clock` back by 1 s once every few simulated seconds. Every
-C++ tf2 buffer (AMCL, Nav2) then "detected a jump back in time" and cleared itself. The node
-robot_state_publisher warned "Moved backwards in time" every second.
-
-The node now rounds the stamps once in integer nanoseconds (`_stamp()` in `sim_node.py`). A test in
-`g1_mujoco_sim/test` covers it. Earlier Nav2 runs on the simulator were affected.
-
 ## Known limits
+
+Performance measurements and the history of fixes are in [docs/dev-notes.md](docs/dev-notes.md).
+
 
 - The hospital building geometry is AABB-approximate. The wing is exact to `layout.py`.
 - The generator leaves out the ceiling, so the world is open from above in the viewer.
 - The lidar intensity is constant. There is no noise model yet on the IMU or the lidar.
-- The script `build_world.py` falls back to unitree_rl_gym's `g1_29dof_rev_1_0.xml` (no hands) when the
+- The script `build_world.py` falls back to unitree_rl_gym's `g1_29dof_rev_1_0.xml` (no hands; set `UNITREE_RL_GYM` to your checkout) when the
   canonical robot MJCF is missing. It then marks `g1_robot.xml` and `robot_source.txt` as a fallback. The
   simulator node then echoes hand commands as hand state.
 

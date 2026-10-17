@@ -39,8 +39,10 @@ sys.path.insert(0, HERE)
 import theatre  # noqa: E402
 
 ROBOT_MJCF = os.path.join(REPO, "g1-brainco-description", "g1_29dof_brainco", "mjcf", "g1_29dof_brainco.xml")
-FALLBACK_MJCF = os.path.expanduser(
-    "~/ntu_dev/unitree_rl_gym/resources/robots/g1_description/g1_29dof_rev_1_0.xml")
+# Optional fallback: a checkout of unitreerobotics/unitree_rl_gym, given by UNITREE_RL_GYM.
+FALLBACK_MJCF = os.path.join(
+    os.environ.get("UNITREE_RL_GYM", os.path.expanduser("~/unitree_rl_gym")),
+    "resources", "robots", "g1_description", "g1_29dof_rev_1_0.xml")
 
 WALL_H = 3.0
 WALL_GROUP = 0
