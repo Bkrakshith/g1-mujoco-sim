@@ -128,7 +128,7 @@ This table lists the third-party Python imports of the scripts in this repositor
 
 | Package | Version | Used by | Notes |
 |---|---|---|---|
-| `mujoco` | 3.14.0 | `build_world.py --check`, `render_replay.py`, the sim node | `g1-whole-body-rl` uses mujoco 3.10.0 in its conda env `g1-mjx`; the scenes here are only used with the `.venv` version |
+| `mujoco` | 3.14.0 | `build_world.py --check`, `render_replay.py`, the sim node | the scenes here are used with the `.venv` version |
 | `numpy` | 1.26.4 | `theatre.py` (camera `look_at`), `render_replay.py`, the sim node | |
 | `imageio` | 2.38.0 | `render_replay.py` | MP4 writer |
 | `imageio-ffmpeg` | 0.6.0 | `render_replay.py` | ffmpeg binary for imageio |
