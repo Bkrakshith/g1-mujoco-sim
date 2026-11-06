@@ -2,19 +2,17 @@
 
 Part of [WardZero](https://bkrakshith.github.io/wardzero/), a simulated hospital for testing robots before they meet patients. Start from the main repository, [hospital-sim](https://github.com/Bkrakshith/hospital-sim).
 
-This repository is the MuJoCo version of the Isaac hospital (`hospital-sim-env/isaac/usd/hospital_g1.usd`). It
-uses the same world frame. The G1 29-DoF rev 1.0 with BrainCo Revo2 hands from `g1-brainco-description` is
-placed in it. The repository holds the generator scripts and the generated scene files. The `g1_mujoco_sim`
-ROS 2 node in `hospital-sim-ros2` loads these scenes. It runs them behind the real robot's low-level interface
-(`/lowcmd`, `/lowstate`).
+The WardZero hospital in MuJoCo, generated from the Isaac scene (`hospital-sim-env/isaac/usd/hospital_g1.usd`)
+in the same world frame, with the Unitree G1 29-DoF rev 1.0 and BrainCo Revo2 hands from `g1-brainco-description`.
+This repository holds the scene generator and the generated scenes. The `g1_mujoco_sim` ROS 2 node in
+`hospital-sim-ros2` loads them and runs them behind the real robot's low-level interface (`/lowcmd`, `/lowstate`).
 
-The scene generator needs two sibling repositories. The repository `hospital-sim-env` gives the room layout,
-the extracted furniture boxes and the surgical objects. The repository `g1-brainco-description` gives the robot
-MJCF. The master repository `hospital-sim` checks everything out side by side. It provides `env.sh`, which
-activates the shared `.venv` with mujoco.
+The generator reads the room layout, the furniture boxes and the objects from `hospital-sim-env`, and the robot
+MJCF from `g1-brainco-description`.
 
-Paths in this README are relative to this repository unless they name a sibling repository or the master
-(`env.sh`, `docs/interfaces.md`). Run the commands from the root of the master checkout.
+Paths are relative to this folder unless they name a sibling repository or a file in the `hospital-sim` root
+(`env.sh`, `docs/interfaces.md`). Commands run from the root of the `hospital-sim` checkout, after `source env.sh`
+(it activates the shared `.venv` with MuJoCo).
 
 ## How it works
 
@@ -451,7 +449,7 @@ The simulator node `g1_mujoco_sim` has these simulator-only extras (ground truth
   comes within 0.40 m of `surgeon_hand`, the held one goes back to its slot. That other instrument is the robot
   arriving with the next one.
 - Until 2026-09-30 the held instrument went back only when the surgeon gripped the next one. It still lay
-  welded along the previous handover axis, so in sessions without `/sim/reset_objects` (the iPad app) the next
+  welded along the previous handover axis, so in sessions without `/sim/reset_objects` the next
   instrument jammed against it. Example: angled_tweezers after needle_driver, then scissors stopped 5 cm to
   9 cm from the hand, and the mission reported "surgeon did not take the instrument".
 - The hand and forearm geoms of the mannequin within 0.22 m of the site are contact-free. A rigid hand cannot
