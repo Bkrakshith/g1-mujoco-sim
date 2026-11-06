@@ -1,4 +1,6 @@
-# g1-mujoco-sim: MuJoCo hospital world for the G1
+# WardZero MuJoCo Backend for the Unitree G1
+
+Part of [WardZero](https://bkrakshith.github.io/wardzero/), a simulated hospital for testing robots before they meet patients. Start from the main repository, [hospital-sim](https://github.com/Bkrakshith/hospital-sim).
 
 This repository is the MuJoCo version of the Isaac hospital (`hospital-sim-env/isaac/usd/hospital_g1.usd`). It
 uses the same world frame. The G1 29-DoF rev 1.0 with BrainCo Revo2 hands from `g1-brainco-description` is
